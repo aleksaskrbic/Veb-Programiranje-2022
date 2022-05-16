@@ -1,0 +1,38 @@
+package com.example.Web_Projekat.entity;
+
+
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+@Entity
+public class Menadzer extends Korisnik  
+{
+	
+	//Veza menadzera i restorana
+	@OneToMany(mappedBy = "menadzer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Restoran> restorani = new HashSet<>();
+	
+	
+	public Set<Restoran> getRestorani() {
+		return restorani;
+	}
+
+	public void setRestorani(Set<Restoran> restorani) {
+		this.restorani = restorani;
+	}
+
+}
