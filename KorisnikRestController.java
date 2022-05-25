@@ -35,15 +35,17 @@ public class KorisnikRestController
 	@PostMapping("/api/registracija")
     public ResponseEntity<String> registracija(@RequestBody RegistracijaDto registracija_dto) {
 
-       /* if (registerDto.getKorisnickoIme().isEmpty() || registerDto.getLozinka().isEmpty()
-                || registerDto.getIme().isEmpty() || registerDto.getPrezime().isEmpty() ||
-                registerDto.getPol().isEmpty()) {
-            return new ResponseEntity("Neispravno uneti podaci", HttpStatus.BAD_REQUEST);
-        }
-
-        if (korisniciService.getByKorisnickoIme(registerDto.getKorisnickoIme()) != null) {
-            return new ResponseEntity("Korisnicko ime vec postoji", HttpStatus.BAD_REQUEST);
-        }*/
+       if (registracija_dto.getUsername().isEmpty() || registracija_dto.getLozinka().isEmpty() || registracija_dto.getIme().isEmpty()
+		     || registracija_dto.getPrezime().isEmpty() || registracija_dto.getDatum_rodjenja().isEmpty())
+		 {
+			return new ResponseEntity("Neispravno uneti podaci", HttpStatus.BAD_REQUEST);
+			
+		 }
+		else if(korisniciService.getByUsername(registracija_dto.getUsername()) != null)
+		{
+			return new ResponseEntity("Korisnicko ime vec postoji!", HttpStatus.BAD_REQUEST);
+		}
+		
 
         String uloga;
 
@@ -133,6 +135,10 @@ public class KorisnikRestController
 	        session.invalidate();
 	        return korisniciService.findOne(id);
 	    }
+	 
+	 //Administrator dodaje menadzere ili dostavljace
+	 
+	 
 
 	 
 	
