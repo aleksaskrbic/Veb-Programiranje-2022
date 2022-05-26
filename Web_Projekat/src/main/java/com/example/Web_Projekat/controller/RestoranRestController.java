@@ -72,14 +72,14 @@ public class RestoranRestController
          restoranDto.setNaziv(restoran.getNaziv());
          restoranDto.setTip_Restorana(restoran.getTip_restorana());
          
-         
-         
-         
          //restoranDto.setLokacijaId(restoran.getLokacija().getId());
          
          restoranDto.setArtikli(restoran.getArtikli());
          restoranDto.setKomentari(komentari);
-
+         restoranDto.setStatus(restoran.getStatus().toString());
+         restoranDto.setLokacija(restoran.getLokacija());
+         
+         //restoranDto.setMenadzer_ID(restoran.getMenadzer().getId());
          return ResponseEntity.ok(restoranDto);
      }
 	    
@@ -105,11 +105,11 @@ public class RestoranRestController
 	        
             restoran.setStatus(StatusRestorana.valueOf(restoranDto.getStatus()));
             
+            long broj = 4;
             
-            
-          /*  Menadzer menadzer;
-            menadzer = (Menadzer) menadzerService.findOne(restoranDto.getMenadzer_ID());
-            restoran.setMenadzer(menadzer);*/
+            Menadzer menadzer;
+            menadzer = (Menadzer) menadzerService.findOne(broj);
+            restoran.setMenadzer(menadzer);
             
 
 
@@ -138,4 +138,3 @@ public class RestoranRestController
 	    
 
 }
-

@@ -55,11 +55,7 @@ public class ArtikalController
        artikal.setKolicina(artikalDto.getKolicina());
        
        Restoran restoran;
-       long broj = 1;
-       
-       long niz[] = { 1, 3, 4 };
-       
-       
+    
        //restoran = restoranService.findOne(broj);
         restoran = restoranService.findOne(artikalDto.getRestoran_ID());
        artikal.setRestoran(restoran);
