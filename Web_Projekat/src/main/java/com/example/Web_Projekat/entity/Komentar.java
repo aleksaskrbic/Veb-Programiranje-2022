@@ -11,7 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -23,12 +25,18 @@ public class Komentar implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@OneToOne
+	@JoinColumn(name = "kupac_id")
+	private Kupac kupac;
+	
+	@OneToOne
+	@JoinColumn(name = "restoran_id")
+	private Restoran restoran;
+	
+	
 	@Column
-	private String Id_kupca;
-	@Column
-	private int Id_Restorana;
-	@Column
-	private String Komentar;
+	private String tekst_komentara;
 	@Column
 	private int ocena;
 	
@@ -37,12 +45,12 @@ public class Komentar implements Serializable
 		super();
 	}
 	
-	public Komentar(long ID,String id_kupca, int id_Restorana, String komentar, int ocena) {
+	public Komentar(Kupac kupac, Restoran restoran, String tekst_komentara, int ocena) {
 		super();
-		id = ID;
-		Id_kupca = id_kupca;
-		Id_Restorana = id_Restorana;
-		Komentar = komentar;
+		//id = ID;
+		this.kupac = kupac;
+		this.restoran = restoran;
+		this.tekst_komentara = tekst_komentara;
 		this.ocena = ocena;
 	}
 
@@ -54,31 +62,41 @@ public class Komentar implements Serializable
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getId_kupca() {
-		return Id_kupca;
+	
+	
+	
+	public Kupac getKupac() {
+		return kupac;
 	}
-	public void setId_kupca(String id_kupca) {
-		Id_kupca = id_kupca;
+
+	public void setKupac(Kupac kupac) {
+		this.kupac = kupac;
 	}
-	public int getId_Restorana() {
-		return Id_Restorana;
+
+	public Restoran getRestoran() {
+		return restoran;
 	}
-	public void setId_Restorana(int id_Restorana) {
-		Id_Restorana = id_Restorana;
+
+	public void setRestoran(Restoran restoran) {
+		this.restoran = restoran;
 	}
-	public String getKomentar() {
-		return Komentar;
+
+	public String getTekst_komentara() {
+		return tekst_komentara;
 	}
-	public void setKomentar(String komentar) {
-		Komentar = komentar;
+
+	public void setTekst_komentara(String tekst_komentara) {
+		this.tekst_komentara = tekst_komentara;
 	}
+
 	public int getOcena() {
 		return ocena;
 	}
+
 	public void setOcena(int ocena) {
 		this.ocena = ocena;
 	}
-	
+
 	@Override
 	public String toString() {
 		return super.toString();

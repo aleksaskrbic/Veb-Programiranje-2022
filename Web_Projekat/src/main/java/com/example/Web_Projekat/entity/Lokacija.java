@@ -2,24 +2,36 @@ package com.example.Web_Projekat.entity;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-public class Lokacija 
+@Entity
+public class Lokacija implements Serializable 
 {
 	
-
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 	
 
-  
+    @Column
 	private double geografska_duzina;
-	
+	@Column
 	private double geografska_sirina;
     
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	private String adresa;
 	
 	
@@ -66,5 +78,7 @@ public class Lokacija
 	public String toString() {
 		return super.toString();
 	}
+
+
 
 }

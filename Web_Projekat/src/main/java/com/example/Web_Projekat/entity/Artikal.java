@@ -6,9 +6,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -18,29 +22,42 @@ public class Artikal implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long Id; 
+	private Long Id; 
 	@Column
 	private String naziv;
 	@Column
+	@Enumerated(EnumType.STRING)
 	private TipHrane tip_hrane;
 	@Column
 	private int kolicina;
 	@Column
 	private String opis;
+	@Column
+	private double Cena;
 
+	
+	@ManyToOne
+    @JoinColumn(name = "restoran_id")
+    private Restoran restoran;
 	
 	public Artikal()
 	{
 		super();
 	}
-	public Artikal(String Naziv, TipHrane tip, int Kolicina, String Opis)
-	{
-		//this.Id = ID;
-		this.naziv = Naziv;
-		this.tip_hrane = tip;
-		this.kolicina = Kolicina;
-		this.opis = Opis;
+	public double getCena() {
+		return Cena;
 	}
+	public void setCena(double cena) {
+		this.Cena = cena;
+	}
+	public Restoran getRestoran() {
+		return restoran;
+	}
+	public void setRestoran(Restoran restoran) {
+		this.restoran = restoran;
+	}
+
+	
 	
 	
 	
@@ -48,10 +65,10 @@ public class Artikal implements Serializable
 	
 	
 	
-	public long getId() {
+	public Long getId() {
 		return Id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 	public String getNaziv() {
