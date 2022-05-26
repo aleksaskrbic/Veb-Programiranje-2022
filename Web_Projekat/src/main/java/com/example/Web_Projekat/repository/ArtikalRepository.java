@@ -20,3 +20,5 @@ public interface ArtikalRepository extends JpaRepository<Artikal, Long> {
 
 
 
+
+

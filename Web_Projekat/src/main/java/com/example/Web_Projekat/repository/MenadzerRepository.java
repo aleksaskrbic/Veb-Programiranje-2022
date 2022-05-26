@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.example.Web_Projekat.*;
 
-public interface MenadzerRepository extends JpaRepository<Menadzer, Long> {
-
+public interface MenadzerRepository extends JpaRepository<Menadzer, Long> 
+{
+     Menadzer getById(Long id);
 }
 
 
