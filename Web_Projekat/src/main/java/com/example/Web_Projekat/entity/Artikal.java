@@ -3,6 +3,10 @@ package com.example.Web_Projekat.entity;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
 
 
 @Entity
@@ -39,6 +45,9 @@ public class Artikal implements Serializable
 	@ManyToOne
     @JoinColumn(name = "restoran_id")
     private Restoran restoran;
+	
+	//@ManyToMany(mappedBy = "Stavke_Porudzbine")
+	// private Set <Porudzbina> porudzbine = new HashSet<>();
 	
 	public Artikal()
 	{
