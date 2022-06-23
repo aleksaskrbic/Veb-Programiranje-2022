@@ -18,27 +18,25 @@ public class TipKupca implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column
+	
+	@Enumerated(EnumType.STRING)
 	private Tip tip;
-	@Column
+	
 	private int popust;
-	@Column
+	
 	private int trazeni_broj_poena;
 	
 	public TipKupca()
 	{
-		this.tip = tip.drveni;
-		this.popust = 0;
-		this.trazeni_broj_poena = 0;
+		
 	}
 	
-	public TipKupca(long Id, Tip TIP, int Popust, int Poeni)
+	public TipKupca(Tip tip_kupca, int Popust, int poeni)
 	{
 		super();
-		this.id = Id;
-		this.tip = TIP;
+		this.tip = tip_kupca;
 		this.popust = Popust;
-		this.trazeni_broj_poena = Poeni;
+		this.trazeni_broj_poena = poeni;
 	}
 	
 	

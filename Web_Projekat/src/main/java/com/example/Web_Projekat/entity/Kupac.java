@@ -22,7 +22,7 @@ public class Kupac extends Korisnik
 {
 
 
-	@Id
+/*	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	//@Column
@@ -78,7 +78,7 @@ public class Kupac extends Korisnik
 	@Override
 	public String toString() {
 		return super.toString();
-	}
+	}*/
 	
 
 }
