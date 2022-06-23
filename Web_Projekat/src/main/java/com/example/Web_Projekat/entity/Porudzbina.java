@@ -1,130 +1,177 @@
 package com.example.Web_Projekat.entity;
 
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-
-
+import java.util.UUID;
 
 @Entity
-public class Porudzbina implements Serializable 
+public class Porudzbina implements Serializable
 
 {
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Column
-	private String sifra_narudzbine;
-	@Column
-	private double cena;
-	@Column
-	private String datum;
-	@Column
-	private String id_kupca;
-	@Column
-	private int id_restroana;
-	/*@Column
-	private List<String> artikli;*/
-	@Column
-	private StatusPorudzbine status_porudzbine;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID uuid;
 	
-	//Druga strana veze sa kupcom
-	// @ManyToMany(mappedBy = "porudzbine")
-	 //private Set<Kupac> kupci = new HashSet<>();
+	/*@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;*/
+	
+	//Veza Porudzbine sa Artiklima koji su na njoj
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Stavke_Porudzbine", joinColumns = {@JoinColumn(name = "porudzbina_id", referencedColumnName = "uuid")},
+            inverseJoinColumns = {@JoinColumn(name = "artikal_id", referencedColumnName = "Id")})
+    private Set<Artikal> artikli = new HashSet<>();
+	
+	@OneToOne
+    @JoinColumn(name = "restoran_id")
+    private Restoran restoran;
+	
+	@Column
+	private Date Datum_i_Vreme;
+	@Column
+	private double Cena;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+    private StatusPorudzbine status;
+	
+	//Veza porudzbine i dostavljaca
+	@ManyToOne
+    @JoinColumn(name = "dostavljac_id")
+    private Dostavljac dostavljac;
+	
+	
+	//Veza Kupca i Porudzbine
+	@ManyToOne
+	@JoinColumn(name = "kupac_id")
+    private Kupac1 kupac;
+	
+	
+	
 
-	
-	 //Druga strana veze sa dostavljacima
-		@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-    	private Dostavljac dostavljac;
-
-	
 	public Porudzbina()
 	{
 		
 	}
 	
-	public Porudzbina( String sifra_narudzbine,  double cena, String datum, String id_kupca, int id_restorana,
-			StatusPorudzbine status_porudzbine) {
-		super();
-		this.sifra_narudzbine = sifra_narudzbine;
-		//this.id = id;
-		this.cena = cena;
-		this.datum = datum;
-		this.id_kupca = id_kupca;
-		this.id_restroana = id_restroana;
-		//this.artikli = artikli;
-		this.status_porudzbine = status_porudzbine;
+	public Porudzbina( Restoran restoran,  Date datum_i_Vreme, Kupac1 kupac, double cena,
+			StatusPorudzbine status) 
+	{
+		this.uuid = uuid;
+		this.restoran = restoran;
+		this.Datum_i_Vreme = datum_i_Vreme;
+		this.kupac = kupac;
+		this.Cena = cena;
+		this.status = status;
+
 	}
 	
+	/*public Porudzbina( Restoran restoran, Date datum_i_Vreme, double cena,
+			StatusPorudzbine status_porudzbine) 
+	{
+		this.uuid = uuid;
+		this.restoran = restoran;
+		this.Datum_i_Vreme = datum_i_Vreme;
+		//this.kupac1 = kupac;
+		this.Cena = cena;
+		this.status_porudzbine = status_porudzbine;
+
+	}*/
 	
 
 	
-
-
 	
 	
-	public long getId() {
+	
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	
+
+	public Set<Artikal> getArtikli() {
+		return artikli;
+	}
+	
+	public void setArtikli(Set<Artikal> artikli) {
+		this.artikli = artikli;
+	} 
+
+
+	/*public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+
+	public void setId(Long id) {
 		this.id = id;
+	}*/
+
+
+	public Kupac1 getKupac() {
+		return kupac;
 	}
+
+	public void setKupac(Kupac1 kupac) {
+		this.kupac = kupac;
+	}
+	
+
+	public Restoran getRestoran() {
+		return restoran;
+	}
+
+	public void setRestoran(Restoran restoran) {
+		this.restoran = restoran;
+	}
+
+	public Date getDatum_i_Vreme() {
+		return Datum_i_Vreme;
+	}
+
+	public void setDatum_i_Vreme(Date datum_i_Vreme) {
+		Datum_i_Vreme = datum_i_Vreme;
+	}
+
 	public double getCena() {
-		return cena;
+		return Cena;
 	}
+
 	public void setCena(double cena) {
-		this.cena = cena;
+		Cena = cena;
 	}
-	public String getDatum() {
-		return datum;
+
+	public StatusPorudzbine getStatus() {
+		return status;
 	}
-	public void setDatum(String datum) {
-		this.datum = datum;
+
+	public void setStatus(StatusPorudzbine status_porudzbine) {
+		this.status = status_porudzbine;
 	}
-	public String getId_kupca() {
-		return id_kupca;
+
+	public Dostavljac getDostavljac() {
+		return dostavljac;
 	}
-	public void setId_kupca(String id_kupca) {
-		this.id_kupca = id_kupca;
+
+	public void setDostavljac(Dostavljac dostavljac) {
+		this.dostavljac = dostavljac;
 	}
-	public int getId_restroana() {
-		return id_restroana;
-	}
-	public void setId_restroana(int id_restroana) {
-		this.id_restroana = id_restroana;
-	}
+
+
+
+
 	
-	public StatusPorudzbine getStatus_porudzbine() {
-		return status_porudzbine;
-	}
-	public void setStatus_porudzbine(StatusPorudzbine status_porudzbine) {
-		this.status_porudzbine = status_porudzbine;
-	}
-	
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-	
+
 	
 	
 	
