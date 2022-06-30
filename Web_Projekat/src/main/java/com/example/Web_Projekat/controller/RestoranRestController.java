@@ -111,6 +111,8 @@ public class RestoranRestController
             menadzer = (Menadzer) menadzerService.findOne(broj);
             restoran.setMenadzer(menadzer);
             
+   
+            
 
 
 	        restoranService.save(restoran);

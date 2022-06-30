@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Web_Projekat.entity.Korisnik;
@@ -21,18 +22,24 @@ import com.example.Web_Projekat.entitydto.LoginDto;
 import com.example.Web_Projekat.entitydto.RegistracijaDto;
 import com.example.Web_Projekat.entitydto.KorisnikDto;
 
-import java.util.ArrayList;
+import org.springframework.http.MediaType;import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+
 @RestController
+//@RequestMapping(value = "/api")
+
 public class KorisnikRestController 
 {
 	@Autowired
     private KorisniciService korisniciService;
 	
-	@PostMapping("/api/registracija")
+	
+	
+	@PostMapping(  value = "/api/registracija", consumes = MediaType.APPLICATION_JSON_VALUE,     // tip podataka koje metoda može da primi
+	        produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> registracija(@RequestBody RegistracijaDto registracija_dto) {
 
        if (registracija_dto.getUsername().isEmpty() || registracija_dto.getLozinka().isEmpty() || registracija_dto.getIme().isEmpty()
@@ -64,29 +71,54 @@ public class KorisnikRestController
         korisnik.setPol(registracija_dto.getPol());
         korisnik.setDatum_rodjenja(registracija_dto.getDatum_rodjenja());
         korisnik.setRole(Uloga.valueOf(uloga));
+        
+
 
         korisniciService.RegisterKorisnik(korisnik);
+        
+	    System.out.println("Uspesna registracija! ");
+
 
         return ResponseEntity.ok("Uspesna registracija!");
+        
+
     }
 	
 	//Logovanje Korisnika
-	 @PostMapping("/api/login")
-	    public ResponseEntity<String> login(@RequestBody LoginDto loginDto, HttpSession session) {
+	 @PostMapping( consumes = MediaType.APPLICATION_JSON_VALUE,     // tip podataka koje metoda može da primi
+		        produces = MediaType.APPLICATION_JSON_VALUE, value = "/api/login")
+	 public ResponseEntity<String> login(@RequestBody LoginDto loginDto, HttpSession session) {
+		 
 
 	        if (loginDto.getUsername().isEmpty() || loginDto.getLozinka().isEmpty()) {
+			      System.out.println("Neispravno uneti podaci 1 ");
+
 	            return new ResponseEntity("Neispravno uneti podaci", HttpStatus.BAD_REQUEST);
 	        }
+	        
 
 	        Korisnik loggedKorisnik = korisniciService.login(loginDto.getUsername(), loginDto.getLozinka());
 
 	        if (loggedKorisnik == null) {
+			      System.out.println("Korisnik je Null! ");
+
 	            return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
 	        }
+	        
+
+		      System.out.println("Uspesno logovanje! ");
 
 	        session.setAttribute("korisnik", loggedKorisnik);
+
+		      System.out.println("Uspesno logovanje! ");
+
 	        return ResponseEntity.ok("Uspesno logovanje!");
 	    }
+	
+	
+	
+	
+	
 	 
 	 //Izmena Korisnika
 	 @PutMapping("/api/korisnik/edit")
@@ -112,9 +144,9 @@ public class KorisnikRestController
 	        List<Korisnik> korisnici = korisniciService.findAll();
 
 	        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
-	        if (loggedKorisnik == null) {
+	      /*  if (loggedKorisnik == null) {
 	            System.out.println("Nema sesije");
-	        }
+	        }*/
 	        
 	        List<KorisnikDto> dtos = new ArrayList<>();
 	        for (Korisnik korisnik : korisnici) {
