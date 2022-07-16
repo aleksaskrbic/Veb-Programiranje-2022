@@ -11,12 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Web_Projekat.service.PorudzbinaService;
 import com.example.Web_Projekat.service.RestoranService;
 import com.example.Web_Projekat.entity.Dostavljac;
+import com.example.Web_Projekat.entity.Korisnik;
 import com.example.Web_Projekat.entity.Kupac1;
 import com.example.Web_Projekat.entity.PORUDZBINA;
 import com.example.Web_Projekat.entity.Porudzbina;
@@ -92,11 +94,43 @@ public class PorudzbinaRestController
 	  
 	  //Prikaz porudzbina po statusu
 	  @GetMapping("/api/porudzbine/status/{status}")
-	    public ResponseEntity<List<PORUDZBINA>> getPorudzbineByKupac(@PathVariable(name = "status") String status) {
-	        List<PORUDZBINA> porudzbine = porudzbinaService.getPorudzbineByStatus(StatusPorudzbine.valueOf(status.toUpperCase()));
-	        return ResponseEntity.ok(porudzbine);
+	    public ResponseEntity<List<PORUDZBINA>> getPorudzbineByStatus(@PathVariable(name = "status") String status) {
+	        //List<PORUDZBINA> porudzbine = porudzbinaService.getPorudzbineByStatus(StatusPorudzbine.valueOf(status.toUpperCase()));
+		   List<PORUDZBINA> porudzbine = porudzbinaService.getPorudzbineByStatus(StatusPorudzbine.valueOf(status.toString()));
+		 
+		  return ResponseEntity.ok(porudzbine);
+	    }
+	  
+	  @GetMapping("/api/porudzbine/dostavljac/{id}")
+	  public ResponseEntity<List<PORUDZBINA>> getPorudzbineByDostavljac(@PathVariable(name = "id") Long id) {
+	      List<PORUDZBINA> porudzbine = porudzbinaService.getPorudzbineByDostavljac(id);
+	      return ResponseEntity.ok(porudzbine);
+	  }
+	  
+	  @PutMapping("/api/porudzbina/edit")
+	    public String editPorudzbina(@RequestBody PorudzbinaDto porudzbinaDto) {
+		  
+	        
+	        String id_porudzbine = porudzbinaDto.getId(); 
+	        long novi_id=Long.parseLong(id_porudzbine);
+	        
+	        PORUDZBINA porudzbina = porudzbinaService.findOne(novi_id);
+             
+		   
+
+		    porudzbina.setStatus(StatusPorudzbine.valueOf(porudzbinaDto.getStatus().toString()));
+
+	        if (porudzbinaDto.getDostavljacId() != null) {
+	            Dostavljac dostavljac = (Dostavljac) korisnikService.findOne(porudzbinaDto.getDostavljacId());
+	            porudzbina.setDostavljac(dostavljac);
+	        }
+	        this.porudzbinaService.savePorudzbina(porudzbina);
+	        return "Uspesno izmenjena porudzbina!";
 	    }
 	
-	
+	  
+	  
 	
 }
+
+

@@ -1,5 +1,6 @@
 package com.example.Web_Projekat.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import com.example.Web_Projekat.entity.Komentar;
 import com.example.Web_Projekat.entity.Korisnik;
+
 import com.example.Web_Projekat.entity.Menadzer;
 import com.example.Web_Projekat.entity.Restoran;
 import com.example.Web_Projekat.entity.StatusRestorana;
@@ -88,7 +90,8 @@ public class RestoranRestController
 	
 	    
 	    //Kreiranje Novog Restorana
-	    @PostMapping("/api/restoran/create")
+	    @PostMapping(value = "/api/restoran/create",consumes = MediaType.APPLICATION_JSON_VALUE,     // tip podataka koje metoda može da primi
+		        produces = MediaType.APPLICATION_JSON_VALUE)
 	    public ResponseEntity<String> createRestoran(@RequestBody RestoranDto restoranDto) {
 
 	        if (restoranDto.getNaziv().isEmpty()) //|| restoranDto.getTip_Restorana().isEmpty()) 
@@ -109,13 +112,23 @@ public class RestoranRestController
             
             Menadzer menadzer;
             menadzer = (Menadzer) menadzerService.findOne(broj);
-            restoran.setMenadzer(menadzer);
+            
+           /*Menadzer menadzer;
+            
+            menadzer = (Menadzer) menadzerService.findOne(restoranDto.getMenadzer_ID());
+            restoran.setMenadzer(menadzer);*/
+
+            
+            
+             
             
    
             
 
 
 	        restoranService.save(restoran);
+	        
+	        
 
 	        return ResponseEntity.ok("Uspesno je dodat restoran!");
 	    }

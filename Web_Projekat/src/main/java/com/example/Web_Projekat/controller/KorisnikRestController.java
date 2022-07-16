@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Web_Projekat.entity.Korisnik;
 import com.example.Web_Projekat.entity.Restoran;
+import com.example.Web_Projekat.entity.StatusRestorana;
 import com.example.Web_Projekat.entity.Uloga;
 import com.example.Web_Projekat.service.ArtikalService;
 import com.example.Web_Projekat.service.KorisniciService;
@@ -21,6 +22,7 @@ import com.example.Web_Projekat.service.RestoranService;
 import com.example.Web_Projekat.entitydto.LoginDto;
 import com.example.Web_Projekat.entitydto.RegistracijaDto;
 import com.example.Web_Projekat.entitydto.KorisnikDto;
+
 
 import org.springframework.http.MediaType;import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +60,7 @@ public class KorisnikRestController
 
         if (registracija_dto.getRole() == null) {
             uloga = Uloga.Kupac.toString();
-        } else {
-            uloga = registracija_dto.getRole();
-        }
+        } 
 
         Korisnik korisnik = new Korisnik();
         korisnik.setUsername(registracija_dto.getUsername());
@@ -70,7 +70,11 @@ public class KorisnikRestController
         korisnik.setPrezime(registracija_dto.getPrezime());
         korisnik.setPol(registracija_dto.getPol());
         korisnik.setDatum_rodjenja(registracija_dto.getDatum_rodjenja());
-        korisnik.setRole(Uloga.valueOf(uloga));
+        korisnik.setRole(Uloga.valueOf(registracija_dto.getRole()));
+        
+
+        
+       
         
 
 
@@ -102,17 +106,19 @@ public class KorisnikRestController
 	        if (loggedKorisnik == null) {
 			      System.out.println("Korisnik je Null! ");
 
-	            return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
+		            return new ResponseEntity<>("Korisnik ne postoji!", HttpStatus.NOT_FOUND);
+
 	        }
 	        
 
 		      System.out.println("Uspesno logovanje! ");
 
-	        session.setAttribute("korisnik", loggedKorisnik);
+	       session.setAttribute("korisnik", loggedKorisnik);
 
 		      System.out.println("Uspesno logovanje! ");
 
 	        return ResponseEntity.ok("Uspesno logovanje!");
+		      
 	    }
 	
 	
