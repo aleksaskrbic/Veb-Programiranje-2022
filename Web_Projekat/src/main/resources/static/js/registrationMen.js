@@ -21,7 +21,7 @@ $(document).on("submit","form",function(event){
 		contentType:"application/json",
 		//data:newKorisnikJSON,
 		data: JSON.stringify({"username":$('#username').val(),"lozinka":$('#lozinka').val(),"ime": $('#ime').val(),
-              "prezime":$('#prezime').val(), "pol":$('#pol').val(),"datum_rodjenja":$('#datum_rodjenja').val(), "role":$('#role').val()}),
+              "prezime":$('#prezime').val(), "pol":$('#pol').val(),"datum_rodjenja":$('#datum_rodjenja').val(), "role":$('#role').val() }),
 		
 	/*	data: JSON.stringify({"username":$("#username").val(),"lozinka":$("#lozinka").val(),"ime":$("#ime").val(),
             "prezime":$("#prezime").val(), "pol":$("#pol").val(),"datum_rodjenja":$("#datum_rodjenja").val()}),*/
