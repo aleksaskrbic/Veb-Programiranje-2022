@@ -18,5 +18,10 @@ public class KomentariService
   {
 	  return komentarRepository.getByRestoranId(id);
   }
+  
+  public Komentar save(Komentar komentar)
+  {
+	  return komentarRepository.save(komentar);
+  }
 	
 }

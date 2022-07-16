@@ -39,6 +39,13 @@ public class RestoranService
 	        return null;
 	    }
 	 
+	 //Brisanje Restorana po ID-JU od strane admina
+	 
+	   public void deleteRestoran(Restoran restoran) 
+	   {
+	       restoranRepository.delete(restoran);
+	   }
+	 
 	 
 	 
 	 public Restoran getByNaziv(String naziv)

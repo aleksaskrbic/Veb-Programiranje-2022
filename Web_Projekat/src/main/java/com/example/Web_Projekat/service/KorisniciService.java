@@ -48,6 +48,20 @@ public class KorisniciService
        return korisniciRepository.findAll();
    }
    
+   //Prikaz Korisnika po IMenu
+   
+   public Korisnik getByName(String ime)
+   {
+	   return korisniciRepository.getByIme(ime);
+   }
+   
+   //Prikaz Korisnika po Prezimenu
+   
+   public Korisnik getByPrezime(String prezime)
+   {
+	   return korisniciRepository.getByPrezime(prezime);
+   }
+   
    //Prikaz Jednog Korisnika
    
    public Korisnik findOne(Long id) {
