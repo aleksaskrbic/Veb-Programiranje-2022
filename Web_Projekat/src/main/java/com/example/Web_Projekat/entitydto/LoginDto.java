@@ -10,6 +10,16 @@ public class LoginDto
 
     public LoginDto() {
     }
+    
+   
+
+	public LoginDto(String username, String lozinka) {
+		super();
+		this.username = username;
+		this.lozinka = lozinka;
+	}
+
+
 
 	public String getUsername() {
 		return username;
