@@ -3,13 +3,13 @@
 	<head>
 	    <title>Home Page</title>
 	    <meta charset="utf-8"/>
-	    <link rel="stylesheet"  href="/css/registrationMen.css"/>
+	    <link rel="stylesheet" type="text/css" href="/css/registrationMen.css"/>
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   		 <script src="/js/jquery.min.js"></script>
-  		<script type="text/javascript" src="/js/registration.js"></script>
+  		<script type="text/javascript" src="/js/pretraga.js"></script>
   	
 
   		
@@ -28,12 +28,12 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li ><a href="index.html">Home</a></li>
-        <li><a href="restorani.html">Restoran</a></li>
+        <li><a href="">Restorani</a></li>
         <li><a href="">Porudzbine</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      
+      <li ><a href="registrationMen.html"><span class="glyphicon glyphicon-log-in"></span>Registracija menadzera</a></li>
       <li class="active"><a href="registration.html"><span class="glyphicon glyphicon-log-in"></span>Registracija korisnika</a></li>
         <li><a href="prijava.html"><span class="glyphicon glyphicon-log-in"></span> Prijavite se</a></li>
       </ul>
@@ -41,42 +41,51 @@
   </div>
 </nav>
 	
-	<form action="Prijava.html">
+	<form action="prijava.html">
   <div class="container">
-    <h1>Registracija korisnika</h1>
-    <p>Molimo vas popunite ovu formu da biste registrovali Kupca.</p>
+    <h1>Pretraga po jednom ili vise kriterijuma</h1>
+    <p>Odaberite kriterijum(e).</p>
     <hr>	
-    <label for="username"><b>Korisnicko Ime</b></label>
-    <input type="text" placeholder="Unesite Korisnicko Ime"  id="username" required>
-    <label for="lozinka"><b>Lozinka</b></label>
-    <input type="password" placeholder="Unesite lozinku"  id="lozinka" required>
-    <label for="ime"><b>Ime</b></label>
-    <input type="text" placeholder="Unesite Ime:"  id="ime" required>
     
-    <label for="prezime"><b>Prezime</b></label>
-    <input type="text" placeholder="Unesite Prezime"  id="prezime" required>	
-
-    <label for="pol"><b>Pol</b></label>
-    <input type="text" placeholder="Unesite Pol"  id="pol" required>
+  
     
-    <label for="datum_rodjenja"><b>Datum Rodjenja</b></label>
-    <input type="text" placeholder="Unesite datum rodjenja"  id="datum_rodjenja" required>
+    <label for="naziv"><b>Naziv</b></label>
+    <input type="text"  id="naziv" >
     
-        <label for="role"><b>Kupac</b></label>
-    <input type="text" placeholder="KUPAC"  id="role" required>
+    <label for="tip_restorana"><b>Tip Restorana</b></label>
+    <input type="text"   id="tip_restorana" >
     
+    <label for="status"><b>Status</b></label>
+    <input type="text"   id="status" >	
 
+    <label for="lokacija"><b>Lokacija</b></label>
+    <input type="text"   id="lokacija" >
 
-
-    
-
+   
     <hr>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+    
 
-    <button type="submit" class="registerbtn">Register</button>
+    <button type="submit" class="registerbtn">Pretrazi</button>
   </div>
+  <table class="table table-dark table-striped" id=pretrazeno>
+
+	<thead>
+      <tr>
+      
+        <th scope="col">naziv</th>
+        <th scope="col">tip_restorana</th>
+        <th scope="col">status</th>
+        <th scope="col">lokacija</th>
+       
+      </tr>
+     </thead>
+   
+   
+      
+
+  </table>
   
-  
+
 </form>
 	</body>
 </html>

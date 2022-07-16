@@ -9,12 +9,12 @@
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   		 <script src="/js/jquery.min.js"></script>
-  		<script type="text/javascript" src="/js/registration.js"></script>
+  		<script type="text/javascript" src="/js/registrationMen.js"></script>
   	
 
   		
 	</head>
-	<body style="background-image:url('Images/crno.jpeg')">
+	<body style="background-image:url('Images/background.jpeg')">
 	<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -28,14 +28,14 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li ><a href="index.html">Home</a></li>
-        <li><a href="restorani.html">Restoran</a></li>
-        <li><a href="">Porudzbine</a></li>
+        <li><a href="svi_restorani.html">Restorani</a></li>
+        <li><a href="#">Porudzbine</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       
       <li class="active"><a href="registration.html"><span class="glyphicon glyphicon-log-in"></span>Registracija korisnika</a></li>
-        <li><a href="prijava.html"><span class="glyphicon glyphicon-log-in"></span> Prijavite se</a></li>
+        <li><a href="Prijava.html"><span class="glyphicon glyphicon-log-in"></span> Prijavite se</a></li>
       </ul>
     </div>
   </div>
@@ -43,8 +43,8 @@
 	
 	<form action="Prijava.html">
   <div class="container">
-    <h1>Registracija korisnika</h1>
-    <p>Molimo vas popunite ovu formu da biste registrovali Kupca.</p>
+    <h1>Registracija menadzera/dostavljaca</h1>
+    <p>Molimo vas popunite ovu formu da biste registrovali menadzera/dostavljaca.</p>
     <hr>	
     <label for="username"><b>Korisnicko Ime</b></label>
     <input type="text" placeholder="Unesite Korisnicko Ime"  id="username" required>
@@ -62,10 +62,8 @@
     <label for="datum_rodjenja"><b>Datum Rodjenja</b></label>
     <input type="text" placeholder="Unesite datum rodjenja"  id="datum_rodjenja" required>
     
-        <label for="role"><b>Kupac</b></label>
-    <input type="text" placeholder="KUPAC"  id="role" required>
-    
-
+    <label for="role"><b>Uloga</b></label>
+    <input type="text" placeholder="Unesite ulogu"  id="role" required>
 
 
     
@@ -73,7 +71,7 @@
     <hr>
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-    <button type="submit" class="registerbtn">Register</button>
+    <button type="submit" class="registerbtn">Register Menager</button>
   </div>
   
   
