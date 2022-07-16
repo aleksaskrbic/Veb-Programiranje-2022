@@ -24,8 +24,10 @@ public class Korisnik implements Serializable
 	private String pol;
 	@Column
 	private String datum_rodjenja;
-	@Column
-	private Uloga role;
+    
+	
+	@Enumerated(EnumType.STRING)
+    private Uloga role;
 	
 	public Korisnik()
 	{

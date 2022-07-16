@@ -71,6 +71,7 @@ public class Restoran implements Serializable
 		this.lokacija = Lokacija;
 		this.artikli = artikli;
 		
+		
 	}
 	
 

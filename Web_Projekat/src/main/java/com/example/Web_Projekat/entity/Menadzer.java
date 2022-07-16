@@ -27,6 +27,19 @@ public class Menadzer extends Korisnik
 	private Set<Restoran> restorani = new HashSet<>();
 	
 	
+	public Menadzer()
+	{
+		
+	}
+	
+	public Menadzer(String username, String lozinka, String ime, String prezime, String pol, 
+            String datum_rodjenja, Uloga role)
+	{
+		 super(username, lozinka,ime, prezime, pol, datum_rodjenja, role);
+		
+	}
+	
+	
 	public Set<Restoran> getRestorani() {
 		return restorani;
 	}

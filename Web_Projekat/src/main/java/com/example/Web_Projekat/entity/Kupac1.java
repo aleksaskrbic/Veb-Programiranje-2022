@@ -28,36 +28,64 @@ public class Kupac1 extends Korisnik implements Serializable
 	//Veza kupca sa Porudzbinama
     @OneToMany(mappedBy = "kupac", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Porudzbina> svePorudzbine = new HashSet<>();
+    private Set<PORUDZBINA> svePorudzbine = new HashSet<>();
     
 	@Column
     private int Ukupan_Broj_Poena;
+	
+	@Column
+	private Tip tip;
     
-    @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "tip_kupca_id")
-    private TipKupca tipKupca;
+    private TipKupca tipKupca;*/
     
-    public Kupac1(String username, String lozinka, String ime, String prezime, String pol, 
+    /*public Kupac1(String username, String lozinka, String ime, String prezime, String pol, 
     		String datum_rodjenja, Uloga role, int broj_poena, TipKupca tip_kupca)
     {
     	super(username, lozinka,ime, prezime, pol, datum_rodjenja, role);
     	this.Ukupan_Broj_Poena = broj_poena;
     	this.tipKupca = tip_kupca;
-    }
+    }*/
+	
+	
+	public Kupac1()
+	{
+		
+	}
+	
+	
 
-	public long getId() {
-		return id;
+
+
+	public Tip getTip() {
+		return tip;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+
+	public void setTip(Tip tip) {
+		this.tip = tip;
 	}
 
-	public Set<Porudzbina> getSvePorudzbine() {
+
+	public Kupac1(String username, String lozinka, String ime, String prezime, String pol, 
+	               String datum_rodjenja, Uloga role, int broj_poena, Tip tip)
+                {
+                    super(username, lozinka,ime, prezime, pol, datum_rodjenja, role);
+                    this.Ukupan_Broj_Poena = broj_poena;
+                    this.tip = tip;
+                    //this.tipKupca = tip_kupca;
+                }
+	
+	
+
+	
+
+	public Set<PORUDZBINA> getSvePorudzbine() {
 		return svePorudzbine;
 	}
 
-	public void setSvePorudzbine(Set<Porudzbina> svePorudzbine) {
+	public void setSvePorudzbine(Set<PORUDZBINA> svePorudzbine) {
 		this.svePorudzbine = svePorudzbine;
 	}
 
@@ -69,13 +97,13 @@ public class Kupac1 extends Korisnik implements Serializable
 		Ukupan_Broj_Poena = ukupan_Broj_Poena;
 	}
 
-	public TipKupca getTipKupca() {
+	/*public TipKupca getTipKupca() {
 		return tipKupca;
 	}
 
 	public void setTipKupca(TipKupca tipKupca) {
 		this.tipKupca = tipKupca;
-	}
+	}*/
 
 
 }
