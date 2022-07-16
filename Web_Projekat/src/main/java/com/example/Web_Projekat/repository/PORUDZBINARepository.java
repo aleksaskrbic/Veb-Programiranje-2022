@@ -17,16 +17,19 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface PorudzbinaRepository extends JpaRepository<PORUDZBINA, Long> {
+public interface PORUDZBINARepository extends JpaRepository<PORUDZBINA, Long> {
   
 	List<PORUDZBINA> getByRestoranId(Long restoranId);
 
     List<PORUDZBINA> getByKupacId(Long kupacId);
 
-   List<PORUDZBINA> getByStatus(StatusPorudzbine status);
+   List<PORUDZBINA> getByStatus( StatusPorudzbine status);
 
    List<PORUDZBINA> getByDostavljacId(Long dostavljacId);
+   
 
-  
+   //Optional<Porudzbina> findByUuid(UUID uuid);
 
+   // @Query("SELECT p FROM Porudzbina p JOIN p.artikli s WHERE s.id = :id")
+   // List<PORUDZBINA> getByArtikalId(Long id); 
 }

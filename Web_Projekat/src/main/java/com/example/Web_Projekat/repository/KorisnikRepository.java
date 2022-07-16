@@ -18,6 +18,9 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Serializable
     //Korisnik getByKorisnickoIme(String korisnickoIme);
 	Korisnik getByRole(Uloga role);
 	
+	Korisnik getByIme(String ime);
+	Korisnik getByPrezime(String prezime);
+	
 	
 	
 }
